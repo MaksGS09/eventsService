@@ -3,10 +3,10 @@
 ![](https://github.com/MaksGS09/eventsService/blob/main/flow.png)
 
 # Legend:
-1. Web page send POST request to the [endpoint](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/endpoint.py).
-Service take payload in json from request and asynchronously write data to the kafka topic `events`.
+1. Web page sends POST request to the [endpoint](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/endpoint.py).
+Service takes payload in json from request and asynchronous writes data to the kafka topic `events`.
 
-2. On other hand the [Spark Structured Streaming application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/stream.py) consume data from kafka topic `events` and each 1 minute save data to the persistent storage in parquet format with next schema:
+2. On other hand the [Spark Structured Streaming application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/stream.py) consumes data from kafka topic `events` and each 1 minute saves data to the persistent storage in parquet format with next schema:
 ```
 root
  |-- event_time: timestamp (nullable = true)
@@ -41,7 +41,7 @@ sample data from this step:
 |2020-11-09 08:51:36.696168|2      |product_3|button_click|category_1    |5          |
 +--------------------------+-------+---------+------------+--------------+-----------+
 ```
-3. On the last step cron job start [Spark application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/analytics_agg.py) for batch processing each 3 hours. Spark job read data from persistent storage, apply analytical aggregations to the data and save data enriched with additional metrics to the analytics DB/cloud storage/etc. In this particular case - to the some temporary storage in parquet format with overwriting existing data. So tools like Presto, AWS Athena, etc. can provide SQL-like access to the data.
+3. On the last step cron job starts [Spark application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/analytics_agg.py) for batch processing each 3 hours. Spark job reads data from persistent storage, applys analytical aggregations to the data and saves data enriched with additional metrics to the analytics DB/cloud storage/etc. In this particular case - to the temporary storage in parquet format with overwriting existing data. So tools like Presto, AWS Athena, etc. can provide SQL-like access to the data.
 data schema:
 ```
 root
