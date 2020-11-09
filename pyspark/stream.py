@@ -66,7 +66,7 @@ class StreamingPipeline(object):
             .select('data.*')\
             .withColumn('event_date', F.to_date('event_time')) \
             .writeStream \
-            .trigger(processingTime='10 seconds') \
+            .trigger(processingTime='1 minute') \
             .outputMode("append")\
             .partitionBy('event_date')\
             .option("checkpointLocation", self.checkpoint_dir) \
