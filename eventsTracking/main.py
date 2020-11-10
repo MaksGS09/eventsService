@@ -1,7 +1,7 @@
 import asyncio
 import uvicorn
 import json
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from confluent_kafka import KafkaException
 from confluent_kafka import Producer
 from datetime import datetime
@@ -51,6 +51,7 @@ class Event(BaseModel):
 
 producer = None
 app = FastAPI()
+secret_token = 'secret_token'
 
 
 @app.on_event("startup")
@@ -66,11 +67,13 @@ def shutdown_event():
 
 
 @app.post("/track")
-async def create_event(event: Event):
+async def create_event(event: Event, x_token: str = Header(...)):
+    if x_token != secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
     try:
         event.event_time = str(datetime.utcnow())
-        result = await producer.produce("events", json.dumps(event.dict()).encode('utf-8'))
-        return {"timestamp": result.timestamp()}
+        await producer.produce("events", json.dumps(event.dict()).encode('utf-8'))
+        return {"detail": "Event created"}
     except KafkaException as ex:
         raise HTTPException(status_code=500, detail=ex.args[0].str())
 
