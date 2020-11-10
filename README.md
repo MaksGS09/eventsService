@@ -86,7 +86,7 @@ final data sample:
 
 # To start this flow locally you need to do the next steps:
 Sure that you have installed:
- - Python (in case we use python 3.8);
+ - Python (in our case we use python 3.8);
  - Kafka client (if no, install it by this [guide](https://kafka.apache.org/quickstart));
  - Spark (install [guide](https://github.com/MaksGS09/eventsService/wiki/Install-Apache-Spark));
  - Clone project https://github.com/MaksGS09/eventsService via IDE or git command.
