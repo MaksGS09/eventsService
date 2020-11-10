@@ -97,18 +97,18 @@ Sure that you have installed:
 bin/kafka-topics.sh --create --topic events --bootstrap-server localhost:9092
 ```
 Now you can start the flow:
-- start the POST API [endpoint](https://github.com/MaksGS09/eventsService/eventsTracking/main.py)
+- start the POST API [endpoint](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/main.py)
 - start the streaming job:
 ```commandline
 /bin/bash ~/PycharmProjects/eventsService/start_stream.sh
 ```
-- start the [fake_requests.py](https://github.com/MaksGS09/eventsService/eventsTracking/fake_requests.py) to simulate requests to the POST endpoint.
+- start the [fake_requests.py](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/fake_requests.py) to simulate requests to the POST API endpoint.
 - after few minutes you can trigger the  [analytics_agg.py](https://github.com/MaksGS09/eventsService/blob/main/pyspark/analytics_agg.py) to get the analytical aggregation.
 - and finally check the final dataset:
 ```commandline
 /bin/bash ~/PycharmProjects/eventsService/start_check.sh
 ```
-Since we defined in the [fake_requests.py](https://github.com/MaksGS09/eventsService/eventsTracking/fake_requests.py) 10000 requests, you can see in the output stats for the same number of rows:
+Since we defined in the [fake_requests.py](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/fake_requests.py) 10000 requests, you can see in the output stats for the same number of rows:
 ```commandline
 +--------------------------+-------+---------+------------+--------------+-----------+-------+------------+
 |event_time                |user_id|app_name |event_action|event_category|event_value|u_count|u_mp_ea     |
