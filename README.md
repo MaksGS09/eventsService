@@ -41,7 +41,7 @@ sample data from this step:
 |2020-11-09 08:51:36.696168|2      |product_3|button_click|category_1    |5          |
 +--------------------------+-------+---------+------------+--------------+-----------+
 ```
-3. On the last step cron job starts [Spark application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/analytics_agg.py) for batch processing each 3 hours. Spark job reads data from persistent storage, applys analytical aggregations to the data and saves data enriched with additional metrics to the analytics DB/cloud storage/etc. In this particular case - to the temporary storage in parquet format with overwriting existing data. So tools like Presto, AWS Athena, etc. can provide SQL-like access to the data.
+3. On the last step cron job starts [Spark application](https://github.com/MaksGS09/eventsService/blob/main/pyspark/analytics_agg.py) for batch processing each 3 hours. Spark job reads data from persistent storage, applies analytical aggregations to the data and saves data enriched with additional metrics to the analytics DB/cloud storage/etc. In this particular case - to the temporary storage in parquet format with overwriting existing data. So tools like Presto, AWS Athena, etc. can provide SQL-like access to this data.
 data schema:
 ```
 root
