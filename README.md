@@ -97,6 +97,7 @@ Sure that you have installed:
 bin/kafka-topics.sh --create --topic events --bootstrap-server localhost:9092
 ```
 Now you can start the flow:
+NOTE: In our case the project cloned to the ~/PycharmProjects directory. If you have cloned the project to a different folder, make sure you are using the correct path in all commands.
 - start the POST API [endpoint](https://github.com/MaksGS09/eventsService/blob/main/eventsTracking/main.py)
 - start the streaming job:
 ```commandline
